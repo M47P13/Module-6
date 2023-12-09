@@ -1,0 +1,316 @@
+using System;
+using System.Collections.Generic;
+
+public struct Point
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+}
+
+public struct Color
+{
+    public int Red { get; set; }
+    public int Green { get; set; }
+    public int Blue { get; set; }
+}
+
+public abstract class Shape
+{
+    protected List<Point> coordinates = new List<Point>(); // Initialize coordinates
+    protected Color color;
+
+    public abstract void Draw();
+    public abstract void Move(Point point);
+    public abstract void Resize();
+}
+
+public class Layer
+{
+    private List<Shape> shapes;
+
+    public Layer()
+    {
+        shapes = new List<Shape>();
+    }
+
+    public void AddShape(Shape shape)
+    {
+        shapes.Add(shape);
+    }
+
+    public void RemoveShape(Shape shape)
+    {
+        shapes.Remove(shape);
+    }
+
+    public void ClearLayer()
+    {
+        shapes.Clear();
+    }
+
+    public void Render()
+    {
+        foreach (var layer in layers)
+        {
+            layer.Render();
+        }
+    }
+
+}
+
+public class Canvas
+{
+    public List<Layer> layers;
+
+    public Canvas()
+    {
+        layers = new List<Layer>();
+    }
+
+    public void AddLayer(Layer layer)
+    {
+        layers.Add(layer);
+    }
+
+    public void RemoveLayer(Layer layer)
+    {
+        layers.Remove(layer);
+    }
+
+    public void ClearCanvas()
+    {
+        foreach (var layer in layers)
+        {
+            layer.ClearLayer();
+        }
+    }
+
+    public void Render()
+    {
+        foreach (var shape in shapes)
+        {
+            layers.Render();
+        }
+    }
+
+    // Public method to retrieve shapes
+    public IEnumerable<Shape> GetShapes()
+    {
+        return Shapes;
+        // List<Shape> allShapes = new List<Shape>();
+        // foreach (var layer in layers)
+        // {
+        //     allShapes.AddRange(layer.GetShapes());
+        // }
+        // return allShapes;
+    }
+
+
+    public void Draw()
+    {
+        foreach (var layer in layers)
+        {
+            layer.Render();
+        }
+    }
+
+        public void VisualizeShapes()
+    {
+        Console.WriteLine("Visualizing shapes on the canvas:");
+        foreach (var layer in layers)
+        {
+            foreach (var shape in layer.shapes)
+            {
+                shape.Draw();
+            }
+        }
+    }
+}
+
+public interface Tool
+{
+    void UseTool();
+}
+
+public class DrawingApp
+{
+    public Canvas canvas;
+    private Tool? selectedTool;
+    private Stack<Action> undoStack;
+    private Stack<Action> redoStack;
+
+    public DrawingApp()
+    {
+        canvas = new Canvas();
+        undoStack = new Stack<Action>();
+        redoStack = new Stack<Action>();
+    }
+
+    public void AddTool(Tool tool)
+    {
+        selectedTool = tool;
+    }
+
+    public void UseSelectedTool()
+    {
+        if (selectedTool == null)
+        {
+            Console.WriteLine("No tool selected");
+            return;
+        }
+
+        selectedTool.UseTool(); // Executes the UseTool method of the selected tool
+    }
+
+    public void Undo()
+    {
+        if (undoStack.Count > 0)
+        {
+            Action actionToUndo = undoStack.Pop(); // Get the last action performed
+            redoStack.Push(actionToUndo); // Add the action to the redo stack before undoing
+
+            // Here, perform the reverse action or its opposite
+
+            // Execute the action, which should undo its effects
+            actionToUndo();
+        }
+        else
+        {
+            Console.WriteLine("Nothing to undo");
+        }
+    }
+
+    public void Redo()
+    {
+        if (redoStack.Count > 0)
+        {
+            Action actionToRedo = redoStack.Pop(); // Get the last undone action
+            undoStack.Push(actionToRedo); // Add the action back to the undo stack before redoing
+
+            // Redo might involve re-executing the action
+            actionToRedo();
+        }
+        else
+        {
+            Console.WriteLine("Nothing to redo");
+        }
+    }
+}
+
+public class PencilTool : Tool
+{
+        public void UseTool()
+    {
+        Console.WriteLine("Using the pencil tool...");
+        Console.WriteLine("Drawing with the pencil...");
+
+        // For demonstration purposes, let's draw a circle and a square using the pencil tool
+        Circle circleToDraw = new Circle();
+        Square squareToDraw = new Square();
+
+        // Move and draw the circle at coordinates (5, 5)
+        circleToDraw.Move(new Point { X = 5, Y = 5 });
+        circleToDraw.Draw();
+
+        // Move and draw the square at coordinates (10, 10)
+        squareToDraw.Move(new Point { X = 10, Y = 10 });
+        squareToDraw.Draw();
+    }
+}
+
+public class EraserTool : Tool
+{
+    public void UseTool()
+    {
+        Console.WriteLine("Using the eraser tool...");
+        Console.WriteLine("Erasing...");
+
+        // For demonstration purposes, let's simulate erasing shapes
+        // Remove shapes from the canvas
+        // Assuming drawingApp is an instance of DrawingApp class
+        foreach (var layer in drawingApp.canvas.layers)
+        {
+            foreach (var shape in layer.GetShapes())
+            {
+                layer.RemoveShape(shape);
+            }
+        }
+    }
+}
+
+public class Circle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing a circle...");
+        // Implement drawing logic for a circle
+    }
+
+    public override void Move(Point point)
+    {
+        Console.WriteLine($"Moving circle to point ({point.X}, {point.Y})...");
+        // Implement moving logic for a circle based on the given point
+    }
+
+    public override void Resize()
+    {
+        Console.WriteLine("Resizing the circle...");
+        // Implement resizing logic for a circle
+    }
+}
+
+public class Square : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing a square...");
+        // Implement drawing logic for a square
+    }
+
+    public override void Move(Point point)
+    {
+        Console.WriteLine($"Moving square to point ({point.X}, {point.Y})...");
+        // Implement moving logic for a square based on the given point
+    }
+
+    public override void Resize()
+    {
+        Console.WriteLine("Resizing the square...");
+        // Implement resizing logic for a square
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create an instance of DrawingApp
+        DrawingApp drawingApp = new DrawingApp();
+
+        // Simulate selecting a tool (you'll need to have implemented concrete Tool classes)
+        Tool pencilTool = new PencilTool(); // Assuming PencilTool is a class implementing the Tool interface
+        drawingApp.AddTool(pencilTool);
+
+        // Use the selected tool
+        drawingApp.UseSelectedTool();
+
+        // Simulate adding layers and shapes
+        Layer layer1 = new Layer();
+        Layer layer2 = new Layer();
+
+        Shape shape1 = new Circle(); // Replace Shape with Circle or another concrete Shape implementation
+        Shape shape2 = new Square(); // Replace Shape with Square or another concrete Shape implementation
+
+        layer1.AddShape(shape1);
+        layer2.AddShape(shape2);
+
+        drawingApp.canvas.AddLayer(layer1);
+        drawingApp.canvas.AddLayer(layer2);
+
+        // Perform undo and redo actions
+        drawingApp.Undo();
+        drawingApp.Redo();
+
+        drawingApp.canvas.VisualizeShapes();
+    }
+}

@@ -1,0 +1,15 @@
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/bin/Debug/net8.0/AttemptTwo
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/bin/Debug/net8.0/AttemptTwo.deps.json
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/bin/Debug/net8.0/AttemptTwo.runtimeconfig.json
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/bin/Debug/net8.0/AttemptTwo.dll
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/bin/Debug/net8.0/AttemptTwo.pdb
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.AssemblyInfoInputs.cache
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.AssemblyInfo.cs
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.csproj.CoreCompileInputs.cache
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.sourcelink.json
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.dll
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/refint/AttemptTwo.dll
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.pdb
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/AttemptTwo.genruntimeconfig.cache
+/Users/mayathompson/Desktop/Applied Programming/Module 6/AttemptTwo/obj/Debug/net8.0/ref/AttemptTwo.dll
